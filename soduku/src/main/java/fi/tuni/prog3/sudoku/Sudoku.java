@@ -62,26 +62,36 @@ public class Sudoku {
         return true;
     }
 
-   public void print() {
-    int rowLength = 9 * 4 + 3; // Calculate the total length of the row (9 cells * 4 characters per cell + 3 vertical separators)
-    String headerLine = generateHeaderLine(rowLength); // Generate the header line
-
-    for (int i = 0; i < 9; i++) {
-        if (i % 3 == 0) {
-            System.out.println(headerLine); // Print the dynamically generated header
-        }
-        for (int j = 0; j < 9; j++) {
-            if (j % 3 == 0) {
-                System.out.print("# ");
+    public void print() {
+        for (int i = 0; i < 9; i++) {
+            // Print the top border of each row
+            if (i % 3 == 0) {
+                System.out.println("#####################################");
+            } else {
+                System.out.println("#---+---+---#---+---+---#---+---+---#");
             }
-            char value = grid[i][j];
-            System.out.print(value != ' ' ? value : ' ');
-            System.out.print(" ");
+    
+            for (int j = 0; j < 9; j++) {
+                // Print the left border of each cell
+                if (j % 3 == 0) {
+                    System.out.print("# ");
+                } else {
+                    System.out.print("| ");
+                }
+    
+                // Print the cell value (space for empty cells)
+                System.out.print(grid[i][j] + " ");
+            }
+    
+            // Print the right border of the last cell in each row
+            System.out.println("#");
+    
+            // Print the bottom border of the Sudoku grid
+            if (i == 8) {
+                System.out.println("#####################################");
+            }
         }
-        System.out.println("#");
     }
-    System.out.println(headerLine); // Print the final header line
-}
 
 private String generateHeaderLine(int rowLength) {
     StringBuilder headerLine = new StringBuilder("#");
